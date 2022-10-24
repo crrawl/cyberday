@@ -1,35 +1,49 @@
 <?php 
+    
     include_once __DIR__ . "/database.php";
 
-    $ucode  =   $_POST["uid"] ?? false;
-    $pwd    =   $_POST["pwd"] ?? false;
-    $submit =   $_POST["submit"] ?? false;
+    $ucode   =   $_POST['usercode'] ?? false;
+    $pwd     =   $_POST['password'] ?? false;
+    $submit  =   $_POST['submit']   ?? false;
 
+    $errors = [];
+    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        echo "<pre>";
-        print_r($_GET);
-        echo "</pre>";
-
-        $CODE_ERROR = "";
-        $PWD_ERROR = "";
+        if (isset($_POST['submit'])) { 
         
-        if (!$ucode) {
-            $CODE_ERROR = "Ievadiet lietotāja nummuru";
-        } else if (!pwd) {
-            $PWD_ERROR = "Ievadiet paroli";
+            extract($_POST);
+            
+            $hashed = md5($pwd);
+            
+            $sql = "SELECT * FROM accounts WHERE usercode = '$ucode' LIMIT 1";
+            $result = mysqli_query($conn, $sql);
+        
+        if (mysqli_num_rows($result) == 0){
+
+            $errors['usercode'] = "Nepareizs lietotāja kods!";
+
+        } else {
+
+            $account = mysqli_fetch_assoc($result);
+        
+        if ($hashed == $account['password']){
+
+            header("Location: profile.php");
+
+        } else {
+
+            $errors["password"] = "Nepareiza parole!";
+
+            }
         }
-        
-        $sql = "SELECT * FROM accounts WHERE uid = '$uid' LIMIT 1";
-        $result = mysqli_query($conn, $sql);
-        $account = mysqli_fetch_assoc($result);
+    }
 
-        echo "<pre>";
-        print_r($account);
+        echo "<pre style = 'color: white';>";
         echo "</pre>";
-
 
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,18 +67,25 @@
                 <img class="logo_img" src="assets/images/bank_logo.png" alt="Bank logo" title="Bank logo">
             </div>
        </div>
-        <form class="right-side form" action="" method="GET">
+        <form class="right-side form" action="" method="POST">
             <div class="input_field">
                 <label for="usercode">Lietotāja kods</label> <br>
-                <input type="text" name="usercode" required>
+                <input type="text" name="usercode" value = "<?= isset($ucode) ? $ucode : '' ?>" required>
             </div>
 
             <div class="input_field">
-                <label for="userpassword">Lietotāja parole <?php if (isset($PWD_ERROR)) echo "*" . $PWD_ERROR ?></label> <br>
-                <input type="text" name="userpassword" required>
+                <label for="password">Lietotāja parole</label><br>
+                <input type="password" name="password" value = "<?= isset($pwd) ? $pwd : '' ?>" required>
             </div>
             <div class="input_field submit">
-                <input type="submit" name="submit" value="Iesniegt">
+                <input type="submit" name="submit" value="Iesniegt"><br><br>
+                <?php
+                
+                foreach ($errors as $error) {
+                    echo "<br>" . "<h5 style = 'color:darkred'>".  $error . "</h5>"; 
+                }
+                "</pre>"
+                ?>
             </div>
         </form>
     </div> 
