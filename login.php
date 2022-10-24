@@ -1,36 +1,4 @@
-<?php 
-    include_once __DIR__ . "/database.php";
 
-    $ucode  =   $_POST["uid"] ?? false;
-    $pwd    =   $_POST["pwd"] ?? false;
-    $submit =   $_POST["submit"] ?? false;
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        echo "<pre>";
-        print_r($_GET);
-        echo "</pre>";
-
-        $CODE_ERROR = "";
-        $PWD_ERROR = "";
-        
-        if (!$ucode) {
-            $CODE_ERROR = "Ievadiet lietotāja nummuru";
-        } else if (!pwd) {
-            $PWD_ERROR = "Ievadiet paroli";
-        }
-        
-        $sql = "SELECT * FROM accounts WHERE uid = '$uid' LIMIT 1";
-        $result = mysqli_query($conn, $sql);
-        $account = mysqli_fetch_assoc($result);
-
-        echo "<pre>";
-        print_r($account);
-        echo "</pre>";
-
-
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +28,7 @@
             </div>
 
             <div class="input_field">
-                <label for="userpassword">Lietotāja parole <?php if (isset($PWD_ERROR)) echo "*" . $PWD_ERROR ?></label> <br>
+                <label for="userpassword">Lietotāja parole</label> <br>
                 <input type="text" name="userpassword" required>
             </div>
             <div class="input_field submit">

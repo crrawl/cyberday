@@ -103,3 +103,30 @@ body {
     /* box-shadow: 1px 0px 12px 3px #fff; */
 }
 
+/* profile.css */
+/* .profile {
+    flex-direction: column!important;
+    min-width: 80%;
+}
+.account-info {
+    display: flex;
+    flex-direction: column;
+    color: var(--text);
+    font-size: 17px;
+}
+.info-header, 
+.info-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-title {
+    border-top: #43DED6 2px solid;
+    /* border-top: var(--accent) 2px solid; */
+/*} 
+*/
+
+.account-info {
+    display: grid;
+    
+}
