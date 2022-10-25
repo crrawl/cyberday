@@ -8,6 +8,9 @@
     --darkengg: #111111;
     --text: #828282;
     --accent: #BB8C3F;
+    --accent2: #43DED6;
+    --minus: #99111F;
+    --plus:  #50C84E;
     --font: 'Roboto', sans-serif;
 }
 
@@ -102,31 +105,62 @@ body {
     cursor: pointer;
     /* box-shadow: 1px 0px 12px 3px #fff; */
 }
-
-/* profile.css */
-/* .profile {
-    flex-direction: column!important;
-    min-width: 80%;
+/* profile */
+.profile {
+    min-height: 800px;
 }
-.account-info {
-    display: flex;
-    flex-direction: column;
-    color: var(--text);
-    font-size: 17px;
+.iban {
+    color: var(--accent);
 }
-.info-header, 
-.info-title {
-    display: flex;
-    justify-content: space-between;
-}
-
-.info-title {
-    border-top: #43DED6 2px solid;
-    /* border-top: var(--accent) 2px solid; */
-/*} 
-*/
-
-.account-info {
+.info {
     display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    row-gap: 5px;
+}
+.s {
+    border-top: var(--accent2) 2px solid;
     
 }
+.d {
+    padding-left: 0!important;
+}
+.grid-item {
+    padding-top: 5px;
+    padding-left: 165px;
+    color: var(--text);
+    font-size: 18px;
+}
+
+/*  */
+
+.paymant-history {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    row-gap: 5px;
+}
+.k {
+    border-top: var(--accent) 2px solid;
+    
+}
+.grid-item {
+    padding-top: 5px;
+    padding-left: 165px;
+    color: var(--text);
+    font-size: 18px;
+}
+.plus {
+    color: var(--plus);
+}
+.minus {
+    color: var(--minus);
+}
+.profile-body {
+    position: relative;
+}
+.lang-switch {
+    position: absolute!important;
+    bottom: 30px;
+    left: 100px;
+}
+

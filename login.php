@@ -16,7 +16,7 @@
             
             $hashed = md5($pwd);
             
-            $sql = "SELECT * FROM accounts WHERE usercode = '$ucode' LIMIT 1";
+            $sql = "SELECT * FROM accounts WHERE usercode = '$ucode'";
             $result = mysqli_query($conn, $sql);
         
         if (mysqli_num_rows($result) == 0){
@@ -29,7 +29,7 @@
         
         if ($hashed == $account['password']){
 
-            header("Location: profile.php");
+            header("Location: profile.php?lang=lv");
 
         } else {
 
